@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "6.4.0",
+    "generators": {
+      "angular": {
+        "generatorName": "typescript-angular",
+        "output": "#{cwd}/output/angular/open-api",
+        "glob": "users.yaml",
+        "additionalProperties": {
+          "supportsES6": true
+        }
+      },
+      "kklToOneView4EduApi": {
+        "generatorName": "aspnetcore",
+        "output": "#{cwd}/output/v1.0.0/usersApi",
+        "glob": "users.yaml",
+        "additionalProperties": {
+          "packageName": "UsersApi",
+          "packageTitle": "UsersApi",
+          "operationIsAsync": true,
+          "operationResultTask": true,
+          "packageVersion": "1.0.0",
+          "aspnetCoreVersion": "6.0"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,171 @@
+openapi: 3.0.2
+info:
+  title: "User API"
+  version: 1.0.0
+  contact:
+    name: "One Technologies Team"
+  description: 'A simple API to manage users'
+tags:
+  - name: user
+    description: 'The user API'
+servers:
+  - description: 'Local server'
+    url: https://localhost:5001
+paths: 
+  
+  /users:
+    get:
+      tags:
+        - user
+      summary: 'Get all users'
+      description: 'Returns all users'
+      operationId: 'GetUsers'
+      responses:
+        '200':
+          description: 'A list of users'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDto'       
+  /user:              
+    post:
+      tags:
+        - user
+      summary: 'Create a new user'
+      description: 'Creates a new user'
+      operationId: 'CreateUser'
+      requestBody:
+        description: 'User to create'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequestDto'
+      responses:
+        '201':
+          description: 'User created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+                 
+  /user/{id}:
+    get:
+      tags:
+        - user
+      summary: 'Get a user by id'
+      description: 'Returns a user by id'
+      operationId: 'GetUserById'
+      parameters:
+        - name: id
+          in: path
+          description: 'The user id'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 'A user'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto' 
+    put:
+        tags:
+            - user
+        summary: 'Update a user by id'
+        description: 'Updates a user by id'
+        operationId: 'UpdateUserById'
+        parameters:
+          - name: id
+            in: path
+            description: 'The user id'
+            required: true
+            schema:
+                type: string
+                format: uuid
+        requestBody:
+            description: 'User to update'
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/UserDto'
+        responses:
+          '200':
+            description: 'User updated'
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/UserDto'
+            
+    delete: 
+        tags:
+            - user
+        summary: 'Delete a user by id'
+        description: 'Deletes a user by id'
+        operationId: 'DeleteUserById'
+        parameters:
+          - name: id
+            in: path
+            description: 'The user id'
+            required: true
+            schema:
+                type: string
+                format: uuid
+        responses:
+          '204':
+            description: 'User deleted successfully'
+
+components: 
+  schemas:
+    UserDto:
+      type: object
+      required:
+        - id
+        - name
+        - email
+        - phone
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: 'The user id'
+        name:
+          type: string
+          description: 'The user name'
+        email:
+          type: string
+          description: 'The user email'
+        phone:
+          type: string
+          description: 'The user phone'
+     
+     
+    CreateUserRequestDto:
+      type: object
+      required:
+        - name
+        - email
+        - phone
+      properties:
+        name:
+          type: string
+          description: 'The user name'
+        email:
+          type: string
+          description: 'The user email'
+        phone:
+          type: string
+          description: 'The user phone'
+            
+
+              
+              
+              
+
+                
+
